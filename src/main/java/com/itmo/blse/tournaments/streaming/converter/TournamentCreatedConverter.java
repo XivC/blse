@@ -1,6 +1,5 @@
 package com.itmo.blse.tournaments.streaming.converter;
 
-import com.itmo.blse.app.streaming.EventDataConverter;
 import com.itmo.blse.tournaments.model.Team;
 import com.itmo.blse.tournaments.model.Tournament;
 import com.itmo.blse.tournaments.repository.MatchRepository;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class TournamentCreatedConverter implements EventDataConverter<Tournament, TournamentCreatedModel> {
+public class TournamentCreatedConverter {
 
     @Autowired
     MatchRepository matchRepository;
@@ -19,7 +18,6 @@ public class TournamentCreatedConverter implements EventDataConverter<Tournament
     @Autowired
     MatchCreatedConverter matchCreatedConverter;
 
-    @Override
     public TournamentCreatedModel toEventData(Tournament tournament) {
         return TournamentCreatedModel.builder()
                 .publicId(tournament.getPublicId())

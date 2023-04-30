@@ -2,10 +2,14 @@ package com.itmo.blse.tournaments.service;
 
 
 import com.itmo.blse.app.error.ValidationError;
+import com.itmo.blse.app.streaming.Event;
+import com.itmo.blse.app.streaming.EventPublisher;
 import com.itmo.blse.tournaments.dto.CreateTournamentDto;
 import com.itmo.blse.tournaments.model.Roles;
 import com.itmo.blse.tournaments.model.Tournament;
 import com.itmo.blse.tournaments.repository.TournamentRepository;
+import com.itmo.blse.tournaments.streaming.event.TournamentCreatedEventCreator;
+import com.itmo.blse.tournaments.streaming.model.TournamentCreatedModel;
 import com.itmo.blse.users.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,12 @@ public class TournamentCreator {
     @Autowired
     MatchesTreeBuilder matchesTreeBuilder;
 
+    @Autowired
+    TournamentCreatedEventCreator tournamentCreatedEventCreator;
+
+    @Autowired
+    EventPublisher eventPublisher;
+
 
     @Transactional
     public Tournament create(CreateTournamentDto data) throws ValidationError {
@@ -40,6 +50,8 @@ public class TournamentCreator {
 
         tournamentRepository.save(tournament);
         matchesTreeBuilder.buildMatchesTree(tournament);
+        Event<TournamentCreatedModel> event = tournamentCreatedEventCreator.createEvent(tournament);
+        eventPublisher.publish(event);
 
         return tournamentRepository.getTournamentById(tournament.getId());  // refresh from db
 

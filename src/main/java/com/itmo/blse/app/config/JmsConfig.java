@@ -36,6 +36,7 @@ public class JmsConfig {
     public JmsTemplate jmsTemplate() {
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory());
         jmsTemplate.setDefaultDestinationName("analytics.stats");
+        jmsTemplate.setSessionTransacted(true);
         return jmsTemplate;
     }
 }

@@ -14,7 +14,7 @@ public class MatchUpdatedModel extends MatchModel {
 
     @Builder
     public MatchUpdatedModel(
-            String publicId,
+            UUID publicId,
             UUID team1PublicId,
             UUID team2PublicId,
             UUID winnerPublicId

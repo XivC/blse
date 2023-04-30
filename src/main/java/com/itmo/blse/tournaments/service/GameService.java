@@ -1,8 +1,12 @@
 package com.itmo.blse.tournaments.service;
 
 import com.itmo.blse.app.error.ValidationError;
+import com.itmo.blse.app.streaming.EventPublisher;
 import com.itmo.blse.tournaments.model.*;
 import com.itmo.blse.tournaments.repository.*;
+import com.itmo.blse.tournaments.streaming.event.GameDroppedEventCreator;
+import com.itmo.blse.tournaments.streaming.event.GamePlayedEventCreator;
+import com.itmo.blse.tournaments.streaming.event.MatchUpdatedEventCreator;
 import com.itmo.blse.users.model.User;
 import com.itmo.blse.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +41,20 @@ public class GameService {
     @Autowired
     TeamRepository teamRepository;
 
-    private MatchStatus updateAndGetMatchStatus(Match match) {
+    @Autowired
+    GameDroppedEventCreator gameDroppedEventCreator;
+
+    @Autowired
+    MatchUpdatedEventCreator matchUpdatedEventCreator;
+
+    @Autowired
+    GamePlayedEventCreator gamePlayedEventCreator;
+
+    @Autowired
+    EventPublisher eventPublisher;
+
+    @Transactional
+    MatchStatus updateAndGetMatchStatus(Match match) {
         Tournament tournament = match.getTournament();
 
         List<Game> games = gameRepository.getGamesByMatch(match);
@@ -59,6 +76,8 @@ public class GameService {
                     }
                 } else {
                     gameRepository.delete(game);
+                    eventPublisher.publish(gameDroppedEventCreator.createEvent(game));
+
                 }
             } else {
                 return MatchStatus.VOTING;
@@ -79,11 +98,13 @@ public class GameService {
                         assert false;
                     }
                     matchRepository.save(next);
+                    eventPublisher.publish(matchUpdatedEventCreator.createEvent(match, winner));
                     match = next;
                     next = match.getNextMatch();
                     while (next != null && matchRepository.getAllByNextMatch(match).size() == 1) {
                         next.setTeam1(winner);
                         matchRepository.save(next);
+                        eventPublisher.publish(matchUpdatedEventCreator.createEvent(match, winner));
                         match = next;
                         next = match.getNextMatch();
                     }
@@ -104,8 +125,13 @@ public class GameService {
         if (match == null) {
             throw new ValidationError(List.of("Match not found"));
         }
+        eventPublisher.publish(matchUpdatedEventCreator.createEvent(match, null));
         Match next = match.getNextMatch();
+        List<Game> gamesToDelete = gameRepository.getGamesByMatch(match);
         gameRepository.deleteAllByMatch(match);
+        for(Game game: gamesToDelete){
+            eventPublisher.publish(gameDroppedEventCreator.createEvent(game));
+        }
 
 
         while (next != null) {
@@ -121,7 +147,16 @@ public class GameService {
             if (Objects.equals(winnerId, nextTeam2Id)) {
                 next.setTeam2(null);
             }
+
+            matchRepository.save(next);
+            eventPublisher.publish(matchUpdatedEventCreator.createEvent(next, null));
+
+
+            gamesToDelete = gameRepository.getGamesByMatch(next);
             gameRepository.deleteAllByMatch(next);
+            for(Game game: gamesToDelete){
+                eventPublisher.publish(gameDroppedEventCreator.createEvent(game));
+            }
             match = next;
             next = next.getNextMatch();
         }
@@ -157,6 +192,7 @@ public class GameService {
         game.setWinner(winner);
         game.setMatch(match);
         gameRepository.save(game);
+        eventPublisher.publish(gamePlayedEventCreator.createEvent(game));
 
         return match;
     }
