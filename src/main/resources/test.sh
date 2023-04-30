@@ -10,6 +10,39 @@ curl -X POST "http://localhost:1453/api/auth/register/" \
 
 
 curl -u smith:12345678 -X GET "http://localhost:1453/api/user/me/"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team1" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team2" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team3" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team4" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team5" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team6" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team7" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team8" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team9" \
+   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/teams/?name=team10" \
+   -H "Content-Type: application/json"
+
+
+
 curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/tournaments/" \
    -H "Content-Type: application/json" \
    -d '{"name": "123s32322", "startDate": "2022-10-10", "maxGames": 3, "approvalRatio": 0.6, "judgesIds": [1, 2], "teamsIds": [1, 2, 3, 4, 5] }'
@@ -105,6 +138,6 @@ curl -u john:12345678 -X POST "http://localhost:1453/api/judge/games/12/approve/
 curl -u brown:12345678 -X POST "http://localhost:1453/api/judge/games/12/approve/" \
    -H "Content-Type: application/json"
 
-#
-#curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/matches/2/drop/" \
-#   -H "Content-Type: application/json"
+
+curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/matches/2/drop/" \
+   -H "Content-Type: application/json"

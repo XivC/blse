@@ -20,12 +20,7 @@ public class EventPublisher {
     public void publish(Event<?> event) {
         try {
             String message = event.toJson();
-            jmsTemplate.send(new MessageCreator() {
-                @Override
-                public Message createMessage(Session session) throws JMSException {
-                    return session.createTextMessage(message);
-                }
-            });
+            jmsTemplate.send(session -> session.createTextMessage(message));
 
         }
         catch (JsonProcessingException ex){
