@@ -26,5 +26,12 @@ public class Game extends Timestamped {
     private Team winner;
 
     @Column(unique = true, nullable = false)
-    private String publicId = UUID.randomUUID().toString();
+    private UUID publicId;
+
+    @PrePersist
+    public void generateUuid() {
+        if (publicId == null) {
+            publicId = UUID.randomUUID();
+        }
+    }
 }

@@ -6,13 +6,14 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Builder
 public class TeamCreatedModel {
 
-    private String publicId;
+    private UUID publicId;
     private String name;
 
 }

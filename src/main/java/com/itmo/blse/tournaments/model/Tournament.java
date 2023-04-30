@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,9 +21,6 @@ public class Tournament extends Timestamped {
 
     @Column(unique = true, nullable = false)
     private String name;
-
-    @Column(unique = true, nullable = false)
-    private String publicId;
 
     @Column(nullable = false)
     private Date startDate;
@@ -41,6 +39,16 @@ public class Tournament extends Timestamped {
 
     @ManyToMany
     private List<Team> teams;
+
+    @Column(unique = true, nullable = false)
+    private UUID publicId;
+
+    @PrePersist
+    public void generateUuid() {
+        if (publicId == null) {
+            publicId = UUID.randomUUID();
+        }
+    }
 
 
 }

@@ -2,10 +2,10 @@ package com.itmo.blse.tournaments.model;
 
 import com.itmo.blse.app.model.Timestamped;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Getter
@@ -21,6 +21,13 @@ public class Team extends Timestamped {
     private String name;
 
     @Column(unique = true, nullable = false)
-    private String publicId = UUID.randomUUID().toString();
+    private UUID publicId;
+
+    @PrePersist
+    public void generateUuid() {
+        if (publicId == null) {
+            publicId = UUID.randomUUID();
+        }
+    }
 
 }

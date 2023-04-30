@@ -4,24 +4,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
-public class MatchCreatedModel extends MatchModel {
-    String tournamentPublicId;
+public class MatchUpdatedModel extends MatchModel {
+
+    private UUID winnerPublicId;
 
     @Builder
-    public MatchCreatedModel(
+    public MatchUpdatedModel(
             String publicId,
-            String tournamentPublicId,
             UUID team1PublicId,
-            UUID team2PublicId
+            UUID team2PublicId,
+            UUID winnerPublicId
     ){
         super(publicId, team1PublicId, team2PublicId);
-        this.tournamentPublicId = tournamentPublicId;
+        this.winnerPublicId = winnerPublicId;
     }
 
 }
