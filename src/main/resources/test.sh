@@ -139,5 +139,5 @@ curl -u brown:12345678 -X POST "http://localhost:1453/api/judge/games/12/approve
    -H "Content-Type: application/json"
 
 
-curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/matches/2/drop/" \
-   -H "Content-Type: application/json"
+#curl -u smith:12345678 -X POST "http://localhost:1453/api/moderator/matches/2/drop/" \
+#   -H "Content-Type: application/json"
