@@ -7,6 +7,7 @@ import com.itmo.blse.tournaments.repository.*;
 import com.itmo.blse.tournaments.streaming.event.GameDroppedEventCreator;
 import com.itmo.blse.tournaments.streaming.event.GamePlayedEventCreator;
 import com.itmo.blse.tournaments.streaming.event.MatchUpdatedEventCreator;
+import com.itmo.blse.users.exception.UserNotInContextException;
 import com.itmo.blse.users.model.User;
 import com.itmo.blse.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,8 +95,6 @@ public class GameService {
                         next.setTeam1(winner);
                     } else if (team2Id == null) {
                         next.setTeam2(winner);
-                    } else {
-                        assert false;
                     }
                     matchRepository.save(next);
                     eventPublisher.publish(matchUpdatedEventCreator.createEvent(match, winner));
@@ -199,7 +198,13 @@ public class GameService {
 
     @Transactional
     public Game approveGame(Long id, boolean isApproved) throws ValidationError {
-        User user = userService.fromContext();
+        User user;
+        try {
+            user = userService.fromContext();
+        }
+        catch (UserNotInContextException ex){
+            throw new ValidationError(List.of("Bad request"));
+        }
 
         Game game = gameRepository.getGameById(id);
         if (game == null) {

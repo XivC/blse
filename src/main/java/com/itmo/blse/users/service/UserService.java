@@ -2,6 +2,7 @@ package com.itmo.blse.users.service;
 
 
 import com.itmo.blse.tournaments.model.Roles;
+import com.itmo.blse.users.exception.UserNotInContextException;
 import com.itmo.blse.users.model.User;
 import com.itmo.blse.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User fromContext(){
+    public User fromContext() throws UserNotInContextException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -30,7 +31,7 @@ public class UserService {
             return userRepository.getUserByUsername(((UserDetails) authentication.getPrincipal()).getUsername());
         }
 
-        return null;
+        throw new UserNotInContextException();
     }
 
     public List<User> listByRole(Roles role){
