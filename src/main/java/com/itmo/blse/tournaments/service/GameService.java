@@ -65,6 +65,7 @@ public class GameService {
             List<GameVote> gameVotes = gameVoteRepository.getGameVotesByGame(game);
             int total = gameVotes.size();
             int positive = (int) gameVotes.stream().filter(GameVote::isApproved).count();
+            assert total <= tournament.getJudges().size();
             if (total == tournament.getJudges().size()) {
                 if ((double) positive / total >= tournament.getApprovalRatio()) {
                     gamesApproved++;
@@ -166,7 +167,7 @@ public class GameService {
     }
 
     @Transactional
-    public Match playGame(Long id, Long winnerId) throws ValidationError {
+    public Game playGame(Long id, Long winnerId) throws ValidationError {
         Match match = matchRepository.getMatchById(id);
         Team winner = teamRepository.getTeamById(winnerId);
 
@@ -193,7 +194,7 @@ public class GameService {
         gameRepository.save(game);
         eventPublisher.publish(gamePlayedEventCreator.createEvent(game));
 
-        return match;
+        return game;
     }
 
     @Transactional
@@ -215,7 +216,7 @@ public class GameService {
             throw new ValidationError(List.of("User is not a judge"));
         }
 
-        if (gameVoteRepository.getGameVotesByGame(game).size() == tournament.getMaxGames()) {
+        if (gameVoteRepository.getGameVotesByGame(game).size() == tournament.getJudges().size()) {
             throw new ValidationError(List.of("Game is already finished"));
         }
 

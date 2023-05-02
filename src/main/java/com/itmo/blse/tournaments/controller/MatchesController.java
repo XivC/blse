@@ -1,8 +1,10 @@
 package com.itmo.blse.tournaments.controller;
 
 import com.itmo.blse.app.error.ValidationError;
+import com.itmo.blse.tournaments.mapper.GameMapper;
 import com.itmo.blse.tournaments.mapper.MatchMapper;
 import com.itmo.blse.tournaments.mapper.TournamentMapper;
+import com.itmo.blse.tournaments.model.Game;
 import com.itmo.blse.tournaments.model.Match;
 import com.itmo.blse.tournaments.model.Tournament;
 import com.itmo.blse.tournaments.service.GameService;
@@ -22,13 +24,16 @@ public class MatchesController {
     MatchMapper matchMapper;
 
     @Autowired
+    GameMapper gameMapper;
+
+    @Autowired
     TournamentMapper tournamentMapper;
 
     @PostMapping("/{id}/play-game/")
     public ResponseEntity<?> playGame(@PathVariable Long id, @RequestParam Long winnerId) {
         try {
-            Match match = gameService.playGame(id, winnerId);
-            return ResponseEntity.status(HttpStatus.CREATED).body(matchMapper.toMatchDto(match));
+            Game game = gameService.playGame(id, winnerId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(gameMapper.toGameDto(game));
         } catch (ValidationError err) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err.getErrors());
         }
