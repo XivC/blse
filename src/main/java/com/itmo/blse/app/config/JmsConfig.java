@@ -19,6 +19,8 @@ public class JmsConfig {
     @Value("${rabbitmq.url}")
     private String connectionUrl;
 
+    @Value("${rabbitmq.queue}")
+    private String queueId;
 
     @Bean
     public RMQConnectionFactory connectionFactory() {
@@ -35,7 +37,7 @@ public class JmsConfig {
     @Bean
     public JmsTemplate jmsTemplate() {
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory());
-        jmsTemplate.setDefaultDestinationName("analytics.stats");
+        jmsTemplate.setDefaultDestinationName(queueId);
         jmsTemplate.setSessionTransacted(true);
         return jmsTemplate;
     }

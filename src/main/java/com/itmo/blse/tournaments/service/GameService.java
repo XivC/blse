@@ -97,13 +97,13 @@ public class GameService {
                         next.setTeam2(winner);
                     }
                     matchRepository.save(next);
-                    eventPublisher.publish(matchUpdatedEventCreator.createEvent(match, winner));
+                    eventPublisher.publish(matchUpdatedEventCreator.createEvent(next, winner));
                     match = next;
                     next = match.getNextMatch();
                     while (next != null && matchRepository.getAllByNextMatch(match).size() == 1) {
                         next.setTeam1(winner);
                         matchRepository.save(next);
-                        eventPublisher.publish(matchUpdatedEventCreator.createEvent(match, winner));
+                        eventPublisher.publish(matchUpdatedEventCreator.createEvent(next, winner));
                         match = next;
                         next = match.getNextMatch();
                     }

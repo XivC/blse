@@ -13,6 +13,7 @@ public class GamePlayedConverter {
     public GamePlayedModel toEventData(Game game) {
         return GamePlayedModel.builder()
                 .publicId(game.getPublicId())
+                .matchPublicId(game.getMatch().getPublicId())
                 .winnerPublicId(game.getWinner().getPublicId())
                 .build();
     }

@@ -56,8 +56,7 @@ public class TeamController {
             Team team = teamCreator.create(name);
             return ResponseEntity.status(HttpStatus.CREATED).body(teamMapper.toTeamDto(team));
 
-        }
-        catch (ValidationError err){
+        } catch (ValidationError err) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err.getErrors());
         }
     }
