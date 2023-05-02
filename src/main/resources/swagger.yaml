@@ -224,7 +224,7 @@ paths:
         "201":
           description: "Created"
           schema:
-            $ref: "#/definitions/MatchDto"
+            $ref: "#/definitions/GameDto"
 
         "400":
           description: "Validation Error"
