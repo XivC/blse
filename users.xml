@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="16.0.2" class="java.beans.XMLDecoder">
+<java version="19.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.concurrent.ConcurrentHashMap">
   <void method="put">
    <string>smith</string>
    <object class="com.itmo.blse.a12n.model.UserAccount">
     <void property="password">
-     <string>$2a$10$G26mtqefjHB9LNHKKZ34uOZQ0PwHdN1eurqAXoX4huc3MZK5f6Bt6</string>
+     <string>$2a$10$m.CRRMP1DVqcGTYkQtwTO.rHEOIZNnp55EsM54J.eLWdRDuPv2gbG</string>
     </void>
     <void property="username">
      <string>smith</string>
@@ -16,7 +16,7 @@
    <string>john</string>
    <object class="com.itmo.blse.a12n.model.UserAccount">
     <void property="password">
-     <string>$2a$10$pjE4AqxWIZPRZH.bSBcGkuoPCmIyx9Lic8aMLWLNOqneGFxIOXQRe</string>
+     <string>$2a$10$hZvxbqW91AQsY8jsOoRlOeLtWSgwIcwuSPVFTbTjp2H/gpQOoIrpO</string>
     </void>
     <void property="username">
      <string>john</string>
@@ -27,10 +27,21 @@
    <string>brown</string>
    <object class="com.itmo.blse.a12n.model.UserAccount">
     <void property="password">
-     <string>$2a$10$guQRo6cBAxFMki/wlynrB.MC1VoEfjVkub/zyJeHSauatL5nuLSbC</string>
+     <string>$2a$10$MJkBVGaBNRDk618XpDBmw.GIe.byEJni8G94yD0nBqL/oi5ymzqiW</string>
     </void>
     <void property="username">
      <string>brown</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>user</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$MAIuZHL7P5lnZOOabFTuWe.AeGcPp33H7N9Zagz8tchgBkmkvgySi</string>
+    </void>
+    <void property="username">
+     <string>user</string>
     </void>
    </object>
   </void>

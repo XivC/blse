@@ -34,7 +34,7 @@ public class TournamentController {
     @Autowired
     TournamentMapper tournamentMapper;
 
-    @GetMapping("/user/tournaments")
+    @GetMapping("/user/tournaments/")
     public List<ListTournamentDto> getTournaments() {
         return tournamentReader
                 .getAll()
@@ -43,7 +43,7 @@ public class TournamentController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("tournaments/{id}/user/")
+    @GetMapping("user/tournaments/{id}/")
     public RetrieveTournamentDto getTournamentById(@PathVariable Long id) {
         Tournament tournament = tournamentReader.getById(id);
         if (tournament == null) {
@@ -54,7 +54,7 @@ public class TournamentController {
     }
 
 
-    @PostMapping("/moderator/tournaments")
+    @PostMapping("/moderator/tournaments/")
     public ResponseEntity<?> createTournament(@RequestBody CreateTournamentDto createTournamentDto){
         try {
             createTournamentValidator.clean(createTournamentDto);
