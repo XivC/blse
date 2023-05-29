@@ -1,0 +1,34 @@
+{
+  "components": [
+    {
+      "label": "Team name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0adjfs0",
+        "columns": null
+      },
+      "id": "Field_0u7pk3t",
+      "key": "team_name"
+    },
+    {
+      "action": "submit",
+      "label": "Create",
+      "type": "button",
+      "layout": {
+        "row": "Row_01kw5ne",
+        "columns": null
+      },
+      "id": "Field_0eckfbi",
+      "key": "field_0g75ksr"
+    }
+  ],
+  "type": "default",
+  "id": "Form_14n2316",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.2.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.11.0"
+  },
+  "schemaVersion": 8
+}
