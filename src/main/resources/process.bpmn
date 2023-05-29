@@ -15,9 +15,15 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1wxfpyt" sourceRef="Activity_0t7qt8l" targetRef="Activity_16s6jmm" />
     <bpmn:endEvent id="Event_0wzy8xq">
-      <bpmn:incoming>Flow_1ju242r</bpmn:incoming>
+      <bpmn:incoming>Flow_0qymx0s</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1ju242r" sourceRef="Activity_16s6jmm" targetRef="Event_0wzy8xq" />
+    <bpmn:sequenceFlow id="Flow_1ju242r" sourceRef="Activity_16s6jmm" targetRef="Activity_0mshp8z" />
+    <bpmn:serviceTask id="Activity_0mshp8z" camunda:delegateExpression="#{unFinalProcess}">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1ju242r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qymx0s</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0qymx0s" sourceRef="Activity_0mshp8z" targetRef="Event_0wzy8xq" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_16nxwrs">
@@ -33,7 +39,10 @@
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0wzy8xq_di" bpmnElement="Event_0wzy8xq">
-        <dc:Bounds x="662" y="99" width="36" height="36" />
+        <dc:Bounds x="1042" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mshp8z_di" bpmnElement="Activity_0mshp8z">
+        <dc:Bounds x="670" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0olshdx_di" bpmnElement="Flow_0olshdx">
         <di:waypoint x="215" y="117" />
@@ -45,7 +54,11 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ju242r_di" bpmnElement="Flow_1ju242r">
         <di:waypoint x="560" y="117" />
-        <di:waypoint x="662" y="117" />
+        <di:waypoint x="670" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qymx0s_di" bpmnElement="Flow_0qymx0s">
+        <di:waypoint x="770" y="117" />
+        <di:waypoint x="1042" y="117" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

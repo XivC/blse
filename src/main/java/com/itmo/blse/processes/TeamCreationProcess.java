@@ -4,6 +4,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import javax.inject.Named;
+import java.util.Date;
 
 
 @Named
@@ -14,14 +15,6 @@ public class TeamCreationProcess implements JavaDelegate {
 
         String teamName = (String) execution.getVariable("team_name");
 
-        // Perform the necessary operations to create a team
-        // For simplicity, let's just print the team details
-        System.out.println("Creating team with name: " + teamName);
-
-        // You can perform additional logic here, such as calling a service or persisting the team to a database
-
-        // Set any necessary variables for the next steps in the process
-        // For example, you might set a team ID variable if needed
-        execution.setVariable("teamId", "ABC123");
+        execution.setVariable("team_name", teamName + new Date().getTime());
     }
 }
