@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0ecm76s" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="CreateTeam" name="Create team" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0olshdx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_16s6jmm" name="create team" camunda:delegateExpression="#{teamCreationProcess}">
+      <bpmn:incoming>Flow_1wxfpyt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ju242r</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0olshdx" sourceRef="StartEvent_1" targetRef="Activity_0t7qt8l" />
+    <bpmn:userTask id="Activity_0t7qt8l" name="fill team form" camunda:formKey="camunda-forms:/forms/create_team.form">
+      <bpmn:incoming>Flow_0olshdx</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wxfpyt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1wxfpyt" sourceRef="Activity_0t7qt8l" targetRef="Activity_16s6jmm" />
+    <bpmn:endEvent id="Event_0wzy8xq" name="ok">
+      <bpmn:incoming>Flow_1pzca8w</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1ju242r" sourceRef="Activity_16s6jmm" targetRef="Gateway_1ug44rm" />
+    <bpmn:exclusiveGateway id="Gateway_1ug44rm">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1ju242r</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pzca8w</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1hmcel7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1pzca8w" sourceRef="Gateway_1ug44rm" targetRef="Event_0wzy8xq">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${result=="success"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_0xo4kdb">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_0j9m558</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_049sr3n" errorRef="Error_1hu4ynd" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1hmcel7" sourceRef="Gateway_1ug44rm" targetRef="Activity_0oka1fi">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${result=="error"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_0oka1fi" name="throw error" camunda:delegateExpression="#{teamCreationErrorProcess}">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1hmcel7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j9m558</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0j9m558" sourceRef="Activity_0oka1fi" targetRef="Event_0xo4kdb" />
+  </bpmn:process>
+  <bpmn:error id="Error_09pav8o" name="Error_21bl88a" />
+  <bpmn:error id="Error_1hu4ynd" name="team creation error" errorCode="teamCreationError" camunda:errorMessage="team with name ${execution.getVariable(&#34;teamName&#34;)} already exists" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CreateTeam">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hbyehe_di" bpmnElement="Activity_16s6jmm">
+        <dc:Bounds x="460" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1lco2od_di" bpmnElement="Activity_0t7qt8l">
+        <dc:Bounds x="280" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ug44rm_di" bpmnElement="Gateway_1ug44rm" isMarkerVisible="true">
+        <dc:Bounds x="625" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wzy8xq_di" bpmnElement="Event_0wzy8xq">
+        <dc:Bounds x="762" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="773" y="203" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qqt3xw_di" bpmnElement="Activity_0oka1fi">
+        <dc:Bounds x="690" y="60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1wc7agp_di" bpmnElement="Event_0xo4kdb">
+        <dc:Bounds x="852" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0olshdx_di" bpmnElement="Flow_0olshdx">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="280" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wxfpyt_di" bpmnElement="Flow_1wxfpyt">
+        <di:waypoint x="380" y="177" />
+        <di:waypoint x="460" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ju242r_di" bpmnElement="Flow_1ju242r">
+        <di:waypoint x="560" y="177" />
+        <di:waypoint x="625" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pzca8w_di" bpmnElement="Flow_1pzca8w">
+        <di:waypoint x="675" y="177" />
+        <di:waypoint x="762" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hmcel7_di" bpmnElement="Flow_1hmcel7">
+        <di:waypoint x="650" y="152" />
+        <di:waypoint x="650" y="100" />
+        <di:waypoint x="690" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j9m558_di" bpmnElement="Flow_0j9m558">
+        <di:waypoint x="790" y="100" />
+        <di:waypoint x="852" y="100" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,74 @@
+{
+  "components": [
+    {
+      "label": "Tournament name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ymsmf7",
+        "columns": null
+      },
+      "id": "Field_15x4c3o",
+      "key": "tournament_name"
+    },
+    {
+      "label": "Max games",
+      "type": "number",
+      "layout": {
+        "row": "Row_13no4pw",
+        "columns": null
+      },
+      "id": "Field_1c6ojrp",
+      "key": "max_games",
+      "decimalDigits": 0,
+      "increment": "1",
+      "validate": {
+        "min": 0
+      }
+    },
+    {
+      "label": "Approval Ratio",
+      "type": "number",
+      "layout": {
+        "row": "Row_0ww6kk3",
+        "columns": null
+      },
+      "id": "Field_07dihh4",
+      "key": "approval_ratio",
+      "validate": {
+        "max": 1,
+        "min": 0
+      }
+    },
+    {
+      "label": "Teams",
+      "type": "checklist",
+      "layout": {
+        "row": "Row_1wgv9is",
+        "columns": null
+      },
+      "id": "Field_0wjust4",
+      "key": "teams",
+      "valuesKey": "teams_to_add"
+    },
+    {
+      "label": "Judges",
+      "type": "checklist",
+      "layout": {
+        "row": "Row_0bu5w0x",
+        "columns": null
+      },
+      "id": "Field_14utmdj",
+      "key": "judges",
+      "valuesKey": "judges_to_add"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0w8ejz6",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.11.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 8
+}
