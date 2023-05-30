@@ -1,0 +1,44 @@
+{
+  "components": [
+    {
+      "label": "Game ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_09fnu87",
+        "columns": null
+      },
+      "id": "Field_1p025n5",
+      "key": "game_id"
+    },
+    {
+      "label": "Approve?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1hgqlu6",
+        "columns": null
+      },
+      "id": "Field_1ao09db",
+      "key": "is_approved"
+    },
+    {
+      "action": "submit",
+      "label": "Confirm",
+      "type": "button",
+      "layout": {
+        "row": "Row_0aib1fw",
+        "columns": null
+      },
+      "id": "Field_1j39np5",
+      "key": "field_10okfqp"
+    }
+  ],
+  "type": "default",
+  "id": "teamForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.11.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 8
+}

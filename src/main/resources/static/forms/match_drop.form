@@ -1,0 +1,34 @@
+{
+  "components": [
+    {
+      "label": "Match ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_108w5gl",
+        "columns": null
+      },
+      "id": "Field_0a3u468",
+      "key": "match_id"
+    },
+    {
+      "action": "submit",
+      "label": "Drop",
+      "type": "button",
+      "layout": {
+        "row": "Row_09fnu87",
+        "columns": null
+      },
+      "id": "Field_1j39np5",
+      "key": "field_10okfqp"
+    }
+  ],
+  "type": "default",
+  "id": "teamForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.11.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 8
+}
