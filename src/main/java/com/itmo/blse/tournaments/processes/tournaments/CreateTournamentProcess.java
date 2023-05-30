@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itmo.blse.app.error.ValidationError;
 import com.itmo.blse.tournaments.dto.CreateTournamentDto;
 import com.itmo.blse.tournaments.model.Tournament;
+import com.itmo.blse.tournaments.processes.AuthJavaDelegate;
 import com.itmo.blse.tournaments.service.TournamentCreator;
 import com.itmo.blse.tournaments.validator.CreateTournamentValidator;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -19,15 +20,16 @@ import java.util.List;
 
 
 @Component
-public class CreateTournamentProcess implements JavaDelegate {
+public class CreateTournamentProcess extends AuthJavaDelegate {
     @Autowired
     TournamentCreator tournamentCreator;
 
     @Autowired
     CreateTournamentValidator createTournamentValidator;
-    @Override
-    public void execute(DelegateExecution execution) {
 
+    @Override
+    public void execute(DelegateExecution execution) throws Exception {
+        super.execute(execution);
         CreateTournamentDto data = (CreateTournamentDto) execution.getVariable("validated_data");
         try {
             Tournament tournament = tournamentCreator.create(data);

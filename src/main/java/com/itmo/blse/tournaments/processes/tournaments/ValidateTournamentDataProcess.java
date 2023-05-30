@@ -3,6 +3,7 @@ package com.itmo.blse.tournaments.processes.tournaments;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itmo.blse.app.error.ValidationError;
 import com.itmo.blse.tournaments.dto.CreateTournamentDto;
+import com.itmo.blse.tournaments.processes.AuthJavaDelegate;
 import com.itmo.blse.tournaments.service.TournamentCreator;
 import com.itmo.blse.tournaments.validator.CreateTournamentValidator;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -18,11 +19,14 @@ import java.util.List;
 
 
 @Component
-public class ValidateTournamentDataProcess implements JavaDelegate {
+public class ValidateTournamentDataProcess extends AuthJavaDelegate {
+
     @Autowired
     CreateTournamentValidator createTournamentValidator;
+
     @Override
-    public void execute(DelegateExecution execution) {
+    public void execute(DelegateExecution execution) throws Exception {
+        super.execute(execution);
         JacksonJsonNode judgesNode = (JacksonJsonNode) execution.getVariable("judges");
         JacksonJsonNode teamsNode = (JacksonJsonNode) execution.getVariable("teams");
         List<Long> judgesIds = new ArrayList<>();
@@ -44,8 +48,7 @@ public class ValidateTournamentDataProcess implements JavaDelegate {
                 .teamsIds(teamsIds).build();
         try {
             createTournamentValidator.clean(data);
-        }
-        catch (ValidationError err){
+        } catch (ValidationError err) {
             execution.setVariable("result", "error");
             return;
         }

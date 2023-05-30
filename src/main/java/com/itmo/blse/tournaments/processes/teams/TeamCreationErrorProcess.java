@@ -1,4 +1,4 @@
-package com.itmo.blse.processes.teams;
+package com.itmo.blse.tournaments.processes.teams;
 
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;

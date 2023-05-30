@@ -3,6 +3,7 @@ package com.itmo.blse.tournaments.processes.tournaments;
 import com.itmo.blse.app.error.ValidationError;
 import com.itmo.blse.tournaments.model.Roles;
 import com.itmo.blse.tournaments.model.Team;
+import com.itmo.blse.tournaments.processes.AuthJavaDelegate;
 import com.itmo.blse.tournaments.repository.TeamRepository;
 import com.itmo.blse.tournaments.service.TeamCreator;
 import com.itmo.blse.tournaments.validator.CreateTeamValidator;
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 @Component
-public class SetupCreateTournamentFormProcess implements JavaDelegate {
+public class SetupCreateTournamentFormProcess extends AuthJavaDelegate {
     @Autowired
     TeamRepository teamRepository;
 
@@ -41,7 +42,6 @@ public class SetupCreateTournamentFormProcess implements JavaDelegate {
 
     private String buildJudgesToAdd(){
         List<User> judges = userService.listByRole(Roles.JUDGE);
-
         List<String> internals = new ArrayList<>();
         for (User user: judges){
             internals.add(
@@ -53,14 +53,11 @@ public class SetupCreateTournamentFormProcess implements JavaDelegate {
         }
         return "[" + String.join(",", internals) + "]";
     }
+
     @Override
-    public void execute(DelegateExecution execution) {
-
-
+    public void execute(DelegateExecution execution) throws Exception {
+        super.execute(execution);
         execution.setVariable("teams_form_input", buildTeamsToAdd());
         execution.setVariable("judges_form_input", buildJudgesToAdd());
-
-
-
     }
 }
