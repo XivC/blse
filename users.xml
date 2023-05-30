@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="16.0.2" class="java.beans.XMLDecoder">
+<java version="19.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.concurrent.ConcurrentHashMap">
+  <void method="put">
+   <string>user396145</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$9U3J7Ltsd.1HhUDZMU6seeOEBOKK5kM7iGjfefH0H.fRHL7qkYTl2</string>
+    </void>
+    <void property="username">
+     <string>user396145</string>
+    </void>
+   </object>
+  </void>
   <void method="put">
    <string>smith</string>
    <object class="com.itmo.blse.a12n.model.UserAccount">
@@ -156,6 +167,17 @@
    </object>
   </void>
   <void method="put">
+   <string>user-976195</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$m4BxFP4X53jPNVn77BueFOa43LOnHfJCCO6QbKUkaGVjUBbO/lM1.</string>
+    </void>
+    <void property="username">
+     <string>user-976195</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
    <string>user-1152695</string>
    <object class="com.itmo.blse.a12n.model.UserAccount">
     <void property="password">
@@ -218,6 +240,17 @@
     </void>
     <void property="username">
      <string>user-1096883</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>user1010506</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$giHLynxvcD3y2UFPy6l6p.U/HvNE1vLViXURyb0YcKHzrXTZvkRfu</string>
+    </void>
+    <void property="username">
+     <string>user1010506</string>
     </void>
    </object>
   </void>
@@ -365,6 +398,28 @@
    </object>
   </void>
   <void method="put">
+   <string>user123228</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$NHQOp1zC4zrecUmMbMojsugF.thrcPIwPQkcFY76Xhptrg5RGhrii</string>
+    </void>
+    <void property="username">
+     <string>user123228</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>user655242</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$JMiehOC8Hx1OtE32wsGNFe3RjcBFY9qfS9IXpRPks8KY.ktHLlx4O</string>
+    </void>
+    <void property="username">
+     <string>user655242</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
    <string>user-613537</string>
    <object class="com.itmo.blse.a12n.model.UserAccount">
     <void property="password">
@@ -383,6 +438,17 @@
     </void>
     <void property="username">
      <string>user-630440</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>user1069065</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$LLM1rAG0wF6mfJJ/L0.11u60N4GbUTmPIaEQcU0x2qu1uMZwIbro.</string>
+    </void>
+    <void property="username">
+     <string>user1069065</string>
     </void>
    </object>
   </void>
@@ -427,6 +493,17 @@
     </void>
     <void property="username">
      <string>user-1197836</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>user53208</string>
+   <object class="com.itmo.blse.a12n.model.UserAccount">
+    <void property="password">
+     <string>$2a$10$WZZM/ZF6ruOh7OF0VZfLtuwo3F0WBSExJHL1D3zbRRPCODtWqJ9b6</string>
+    </void>
+    <void property="username">
+     <string>user53208</string>
     </void>
    </object>
   </void>
