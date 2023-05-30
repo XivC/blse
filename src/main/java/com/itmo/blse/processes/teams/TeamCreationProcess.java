@@ -14,10 +14,15 @@ import javax.inject.Named;
 import java.util.Date;
 
 
+
 @Component
 public class TeamCreationProcess implements JavaDelegate {
+    private final TeamCreator teamCreator;
+
     @Autowired
-    TeamCreator teamCreator;
+    public TeamCreationProcess(TeamCreator teamCreator) {
+        this.teamCreator = teamCreator;
+    }
     @Override
     public void execute(DelegateExecution execution) {
 
