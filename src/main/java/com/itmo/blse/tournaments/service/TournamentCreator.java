@@ -49,9 +49,7 @@ public class TournamentCreator {
                 .build();
 
         tournamentRepository.save(tournament);
-        matchesTreeBuilder.buildMatchesTree(tournament);
-        Event<TournamentCreatedModel> event = tournamentCreatedEventCreator.createEvent(tournament);
-        eventPublisher.publish(event);
+
 
         return tournamentRepository.getTournamentById(tournament.getId());  // refresh from db
 
