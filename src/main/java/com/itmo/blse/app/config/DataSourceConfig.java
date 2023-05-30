@@ -13,6 +13,8 @@ public class DataSourceConfig {
     @Bean(name = "dataSource")
     @ConfigurationProperties(prefix = "datasource")
     public DataSource dataSource() {
-        return new AtomikosDataSourceBean();
+        AtomikosDataSourceBean bean = new AtomikosDataSourceBean();
+        bean.setMaxPoolSize(1000);
+        return bean;
     }
 }
