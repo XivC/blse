@@ -1,6 +1,6 @@
 curl -X POST "http://localhost:1453/api/auth/register/" \
    -H "Content-Type: application/json" \
-   -d '{"username": "john", "password": "12345678", "roles": ["JUDGE", "USER"] }'
+   -d '{"username": "admin", "password": "12345678", "roles": ["JUDGE", "USER", "MODERATOR"] }'
 curl -X POST "http://localhost:1453/api/auth/register/" \
    -H "Content-Type: application/json" \
    -d '{"username": "brown", "password": "12345678", "roles": ["JUDGE", "USER"] }'
